@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Usuários - Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Gerenciar Usuários</h1>
+        <nav>
+            <a href="/admin">Voltar ao Painel</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="admin-content">
+            <h2>Lista de Usuários</h2>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Admin</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{ usuario.id }}</td>
+                        <td>{{ usuario.nome }}</td>
+                        <td>{{ usuario.email }}</td>
+                        <td>{{ 'Sim' if usuario.is_admin else 'Não' }}</td>
+                        <td>
+                            <a href="/admin/usuario/{{ usuario.id }}/editar" class="btn-edit">Editar</a>
+                            <form method="POST" action="/admin/usuario/{{ usuario.id }}/deletar" style="display: inline;" onsubmit="return confirm('Tem certeza que deseja deletar este usuário?')">
+                                <button type="submit" class="btn-delete">Deletar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 ShipeT</p>
+    </footer>
+</body>
+</html>
