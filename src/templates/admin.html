@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Painel Administrativo</h1>
+        <nav>
+            <a href="/">Voltar ao Site</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="admin-dashboard">
+            <h2>Bem-vindo ao Painel de Administração, {{ current_user.nome }}!</h2>
+            <p>Gerencie usuários, posts, comentários e curtidas da plataforma.</p>
+
+            <div class="admin-menu">
+                <a href="/admin/usuarios" class="admin-link">Gerenciar Usuários</a>
+                <a href="/admin/posts" class="admin-link">Gerenciar Posts</a>
+                <a href="/admin/comentarios" class="admin-link">Gerenciar Comentários</a>
+                <a href="/admin/curtidas" class="admin-link">Gerenciar Curtidas</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 ShipeT</p>
+    </footer>
+</body>
+</html>

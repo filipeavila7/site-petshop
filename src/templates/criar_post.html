@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Post - Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Criar Novo Post</h1>
+        <nav>
+            <a href="/admin/posts">Voltar aos Posts</a>
+            <a href="/admin">Painel Admin</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="admin-content">
+            <h2>Criar Novo Post</h2>
+            <form method="POST" action="/admin/post/criar" enctype="multipart/form-data" class="form-admin">
+                <div class="form-group">
+                    <label for="nome_post">Nome do Post:</label>
+                    <input type="text" id="nome_post" name="nome_post" required>
+                </div>
+                <div class="form-group">
+                    <label for="imagem">Imagem do Pet (obrigatória):</label>
+                    <input type="file" id="imagem" name="imagem" accept="image/*" required>
+                </div>
+                <button type="submit" class="btn-submit">Criar Post</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Plataforma de Posts</p>
+    </footer>
+</body>
+</html>

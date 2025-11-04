@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Post - Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Editar Post</h1>
+        <nav>
+            <a href="/admin/posts">Voltar à Lista</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="admin-content">
+            <form method="POST" enctype="multipart/form-data" class="form-admin">
+                <div class="form-group">
+                    <label for="nome_post">Nome do Post:</label>
+                    <input type="text" id="nome_post" name="nome_post" value="{{ post.nome_post }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="imagem">Imagem do Pet (opcional, deixe em branco para manter a atual):</label>
+                    <input type="file" id="imagem" name="imagem" accept="image/*">
+                    {% if post.imagem %}
+                    <p>Imagem atual: <img src="{{ url_for('static', filename=post.imagem) }}" alt="Imagem atual" style="max-width: 200px;"></p>
+                    {% endif %}
+                </div>
+
+                <button type="submit" class="btn-submit">Salvar Alterações</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Plataforma de Posts</p>
+    </footer>
+</body>
+</html>
