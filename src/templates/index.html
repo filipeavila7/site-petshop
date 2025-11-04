@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="static/style.css">
+    </head>
+    <body>
+        <header class="header">
+            <div class="cabecalho">
+                <div class="logo">
+                    <img src="static/img/cat.png" alt="logo">
+                    <p>ShipeT</p>
+                </div>
+                <h1>PET AMIGOS</h1>
+                <div class="login">
+                    {% if current_user.is_authenticated %}
+                    <!-- Usuário logado → mostra botão de logout -->
+                    <a href="{{ url_for('logout') }}">
+                        <button>Logout</button>
+                    </a>
+                    {% if current_user.is_admin %}
+                    <a href="{{ url_for('admin') }}">
+                        <button>Admin</button>
+                    </a>
+                    {% endif %}
+                    {% else %}
+                    <!-- Usuário não logado → mostra botão de login e cadastro -->
+                    <button id="abrirModal">Login</button>
+                    <button id="abrirModalCadastro" >Cadastrar</button>
+                    {% endif %}
+                </div>
+            </div>
+
+            <nav class="nav-bar">
+                <ul class="nav-links">
+                    <li><a href>Home</a></li>
+                    <li><a href>Produtos</a></li>
+                    <li><a href>Pets</a></li>
+                    <li><a href>Serviços</a></li>
+                    <li><a href>Contato</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="inicio-section">
+            <div class="overlay"></div>
+            <div class="titulo">
+                <h1>Bem vindo ao Pet Amigos</h1>
+                <button>Conhecer!</button>
+            </div>
+        </section>
+        </section>
+
+        <section class="prod-section">
+            <h2>Produtos</h2>
+            <div class="prod-container">
+
+                <div class="card-prod">
+                    <img src alt>
+                    <h3>nome</h3>
+                    <p>valor</p>
+                </div>
+                <div class="card-prod">
+                    <img src alt>
+                    <h3>nome</h3>
+                    <p>valor</p>
+                </div>
+                <div class="card-prod">
+                    <img src alt>
+                    <h3>nome</h3>
+                    <p>valor</p>
+                </div>
+                <div class="card-prod">
+                    <img src alt>
+                    <h3>nome</h3>
+                    <p>valor</p>
+                </div>
+                <div class="card-prod">
+                    <img src alt>
+                    <h3>nome</h3>
+                    <p>valor</p>
+                </div>
+                <div class="card-prod">
+                    <img src alt>
+                    <h3>nome</h3>
+                    <p>valor</p>
+                </div>
+                <div class="card-prod">
+                    <img src alt>
+                    <h3>nome</h3>
+                    <p>valor</p>
+                </div>
+                <div class="card-prod">
+                    <img src alt>
+                    <h3>nome</h3>
+                    <p>valor</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal Login -->
+        <div id="modalLogin" class="modal">
+            <div class="modal-conteudo">
+                <span class="fechar">&times;</span>
+                <h2>Entrar</h2>
+                <form action="{{url_for('login')}}" method="post">
+                    <input type="email" name="email" placeholder="E-mail"
+                        required>
+                    <input type="password" name="senha" placeholder="Senha"
+                        required>
+                    <button type="submit">Entrar</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal Cadastro -->
+        <div id="modalCadastro" class="modal">
+            <div class="modal-conteudo">
+                <span class="fechar-cadastro">&times;</span>
+                <h2>Cadastrar</h2>
+                <form id="formCadastro">
+                    <input type="text" id="nome" name="nome" placeholder="Nome completo" required>
+                    <input type="email" id="emailCadastro" name="email" placeholder="E-mail" required>
+                    <input type="password" id="senhaCadastro" name="senha" placeholder="Senha (mín. 6 caracteres)" required>
+                    <button type="submit">Cadastrar</button>
+                </form>
+                <div id="mensagemCadastro" style="margin-top: 10px; color: red;"></div>
+            </div>
+        </div>
+
+        <section class="pet-sec">
+            <h2>Pets</h2>
+            <div class="pet-container">
+                <div class="card-pet" data-post-id="1">
+                    <div class="pet-content">
+                        <img src="static/img/gato.jpg" alt>
+                        <div class="acoes">
+                            <img src="static/img/heart.png" class="curtir-btn"
+                                onclick="curtirPost(1, this)">
+                            <span class="total-curtidas">0</span>
+                            <img src="static/img/coment.png" alt="comentario"
+                                onclick="abrirComentarios(1)">
+                            <span class="total-comentarios">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-pet" data-post-id="2">
+                    <div class="pet-content">
+                        <img
+                            src="static/img/raca-de-cachorro-que-parece-um-lobo.jpg"
+                            alt>
+                    </div>
+                    <div class="acoes">
+                        <img src="static/img/heart.png" class="curtir-btn"
+                            onclick="curtirPost(2, this)">
+                        <span class="total-curtidas">0</span>
+                        <img src="static/img/coment.png" alt="comentario"
+                            onclick="abrirComentarios(2)">
+                        <span class="total-comentarios">0</span>
+                    </div>
+                </div>
+                <div class="card-pet" data-post-id="3">
+                    <div class="pet-content">
+                        <img src="static/img/Pastor-3x4.jpg" alt>
+                    </div>
+                    <div class="acoes">
+                        <img src="static/img/heart.png" class="curtir-btn"
+                            onclick="curtirPost(3, this)">
+                        <span class="total-curtidas">0</span>
+                        <img src="static/img/coment.png" alt="comentario"
+                            onclick="abrirComentarios(3)">
+                        <span class="total-comentarios">0</span>
+                    </div>
+                </div>
+                <div class="card-pet" data-post-id="4">
+                    <div class="pet-content">
+                        <img src="static/img/preto.jpeg" alt>
+                    </div>
+                    <div class="acoes">
+                        <img src="static/img/heart.png" class="curtir-btn"
+                            onclick="curtirPost(4, this)">
+                        <span class="total-curtidas">0</span>
+                        <img src="static/img/coment.png" alt="comentario"
+                            onclick="abrirComentarios(4)">
+                        <span class="total-comentarios">0</span>
+                    </div>
+                </div>
+                <div class="card-pet" data-post-id="5">
+                    <div class="pet-content">
+                        <img src="static/img/image.png" alt>
+                    </div>
+                    <div class="acoes">
+                        <img src="static/img/heart.png" class="curtir-btn"
+                            onclick="curtirPost(5, this)">
+                        <span class="total-curtidas">0</span>
+                        <img src="static/img/coment.png" alt="comentario"
+                            onclick="abrirComentarios(5)">
+                        <span class="total-comentarios">0</span>
+                    </div>
+                </div>
+                <div class="card-pet" data-post-id="6">
+                    <div class="pet-content">
+                        <img
+                            src="static/img/guia_racas_golden_retriever_dogvibe.jpg"
+                            alt>
+                    </div>
+                    <div class="acoes">
+                        <img src="static/img/heart.png" class="curtir-btn"
+                            onclick="curtirPost(6, this)">
+                        <span class="total-curtidas">0</span>
+                        <img src="static/img/coment.png" alt="comentario"
+                            onclick="abrirComentarios(6)">
+                        <span class="total-comentarios">0</span>
+                    </div>
+                </div>
+                <div class="card-pet" data-post-id="7">
+                    <div class="pet-content">
+                        <img src="static/img/cachorro-que-parece-lobo.jpg" alt>
+                    </div>
+                    <div class="acoes">
+                        <img src="static/img/heart.png" class="curtir-btn"
+                            onclick="curtirPost(7, this)">
+                        <span class="total-curtidas">0</span>
+                        <img src="static/img/coment.png" alt="comentario"
+                            onclick="abrirComentarios(7)">
+                        <span class="total-comentarios">0</span>
+                    </div>
+                </div>
+
+
+
+                <div class="card-pet" data-post-id="8">
+                    <div class="pet-content">
+                        <img src="static/img/gato2.jpg" alt>
+                    </div>
+                    <div class="acoes">
+                        <img src="static/img/heart.png" class="curtir-btn"
+                            onclick="curtirPost(8, this)">
+                        <span class="total-curtidas">0</span>
+                        <img src="static/img/coment.png" alt="comentario"
+                            onclick="abrirComentarios(8)">
+                        <span class="total-comentarios">0</span>
+                    </div>
+                </div>
+                <div class="card-pet" data-post-id="9">
+                    <div class="pet-content">
+                        <img src="static/img/xamp.jpg" alt>
+                    </div>
+                    <div class="acoes">
+                        <img src="static/img/heart.png" class="curtir-btn"
+                            onclick="curtirPost(9, this)">
+                        <span class="total-curtidas">0</span>
+                        <img src="static/img/coment.png" alt="comentario"
+                            onclick="abrirComentarios(9)">
+                        <span class="total-comentarios">0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal de comentários -->
+        <div id="modalComentarios" class="modal-comentario" data-post-id>
+            <div class="modal-conteudo">
+                <span class="fechar-comentario">&times;</span>
+                <h2>Comentários</h2>
+                <div id="comentarios-lista"></div>
+
+                <form id="form-comentario">
+                    <textarea id="comentario-texto"
+                        placeholder="Escreva um comentário..."></textarea>
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+        </div>
+
+        <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+        
+    </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Comentários - Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Gerenciar Comentários</h1>
+        <nav>
+            <a href="/admin">Voltar ao Painel</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="admin-content">
+            <h2>Lista de Comentários</h2>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Usuário</th>
+                        <th>Post</th>
+                        <th>Texto</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for comentario in comentarios %}
+                    <tr>
+                        <td>{{ comentario.id }}</td>
+                        <td>{{ comentario.usuario.nome }}</td>
+                        <td>{{ comentario.post.nome_post }}</td>
+                        <td>{{ comentario.texto[:50] }}{% if comentario.texto|length > 50 %}...{% endif %}</td>
+                        <td>
+                            <form method="POST" action="/admin/comentario/{{ comentario.id }}/deletar" style="display: inline;" onsubmit="return confirm('Tem certeza que deseja deletar este comentário?')">
+                                <button type="submit" class="btn-delete">Deletar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Plataforma de Posts</p>
+    </footer>
+</body>
+</html>
