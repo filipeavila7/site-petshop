@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Posts - Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Gerenciar Posts</h1>
+        <nav>
+            <a href="/admin">Voltar ao Painel</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="admin-content">
+            <h2>Lista de Posts</h2>
+            <a href="/admin/post/criar" class="btn-submit" style="margin-bottom: 20px;">Criar Novo Post</a>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome do Post</th>
+                        <th>Idade</th>
+                        <th>Peso</th>
+                        <th>Raça</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in posts %}
+                    <tr>
+                        <td>{{ post.id }}</td>
+                        <td>{{ post.nome_post }}</td>
+                        <td>{{ post.idade }} anos</td>
+                        <td>{{ post.peso }} kg</td>
+                        <td>{{ post.raca }}</td>
+                        <td>
+                            <a href="/admin/post/{{ post.id }}/editar" class="btn-edit">Editar</a>
+                            <form method="POST" action="/admin/post/{{ post.id }}/deletar" style="display: inline;" onsubmit="return confirm('Tem certeza que deseja deletar este post?')">
+                                <button type="submit" class="btn-delete">Deletar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 ShipeT</p>
+    </footer>
+</body>
+</html>

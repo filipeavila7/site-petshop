@@ -1,0 +1,5 @@
+- [x] Add CSS styles for .modal-content class in style.css to provide decent layout, padding, and centering for the post details modal.
+- [x] Update the image sizing in the modal to prevent it from being too large (e.g., set max-width to 300px and height to auto).
+- [x] Ensure the modal matches the site's theme and is responsive.
+- [x] Test the modal functionality after changes (server started, but browser tool disabled; manual testing recommended).
+- [x] Fix modal to pull information from database (added /post/<post_id> route and updated JS to fetch specific post data).
