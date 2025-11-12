@@ -1,0 +1,8 @@
+- [x] Importar produto_model no __init__.py
+- [x] Adicionar rotas CRUD para produtos no admin em routes.py
+- [x] Criar template admin_produtos.html
+- [x] Criar template criar_produto.html
+- [x] Criar template editar_produto.html
+- [x] Adicionar rota para listar produtos em JSON
+- [x] Modificar scripts.js para carregar produtos dinamicamente
+- [x] Testar funcionalidade

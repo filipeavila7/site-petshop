@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="static/style.css">
+    </head>
+    <body>
+        <header class="header">
+            <div class="cabecalho">
+                <div class="logo">
+                    <img src="static/img/cat.png" alt="logo">
+                    <p>ShipeT</p>
+                </div>
+                <h1>PET AMIGOS</h1>
+                <div class="login">
+                    {% if current_user.is_authenticated %}
+                    <!-- Usuário logado → mostra botão de logout -->
+                    <a href="{{ url_for('logout') }}">
+                        <button>Logout</button>
+                    </a>
+                    {% if current_user.is_admin %}
+                    <a href="{{ url_for('admin') }}">
+                        <button>Admin</button>
+                    </a>
+                    {% endif %}
+                    {% else %}
+                    <!-- Usuário não logado → mostra botão de login e cadastro -->
+                    <button id="abrirModal">Login</button>
+                    <button id="abrirModalCadastro" >Cadastrar</button>
+                    {% endif %}
+                </div>
+            </div>
+
+            <nav class="nav-bar">
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#produtos">Produtos</a></li>
+                    <li><a href="#pets">Pets</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section id="home" class="inicio-section">
+            <div class="overlay"></div>
+            <div class="titulo">
+                <h1>Bem vindo ao Pet Amigos</h1>
+                <button>Conhecer!</button>
+            </div>
+        </section>
+        </section>
+
+        <section id="produtos" class="prod-section">
+            <h2>Produtos</h2>
+            <div class="prod-container">
+                <!-- Produtos serão carregados dinamicamente aqui -->
+            </div>
+        </section>
+
+        <!-- Modal Login -->
+        <div id="modalLogin" class="modal">
+            <div class="modal-conteudo">
+                <span class="fechar">&times;</span>
+                <h2>Entrar</h2>
+                <form action="{{url_for('login')}}" method="post">
+                    <input type="email" name="email" placeholder="E-mail"
+                        required>
+                    <input type="password" name="senha" placeholder="Senha"
+                        required>
+                    <button type="submit">Entrar</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal Cadastro -->
+        <div id="modalCadastro" class="modal">
+            <div class="modal-conteudo">
+                <span class="fechar-cadastro">&times;</span>
+                <h2>Cadastrar</h2>
+                <form id="formCadastro">
+                    <input type="text" id="nome" name="nome" placeholder="Nome completo" required>
+                    <input type="email" id="emailCadastro" name="email" placeholder="E-mail" required>
+                    <input type="password" id="senhaCadastro" name="senha" placeholder="Senha (mín. 6 caracteres)" required>
+                    <button type="submit">Cadastrar</button>
+                </form>
+                <div id="mensagemCadastro" style="margin-top: 10px; color: red;"></div>
+            </div>
+        </div>
+
+        <section id="pets" class="pet-sec">
+            <h2>Pets</h2>
+            <div class="pet-container">
+                <!-- Posts serão carregados dinamicamente aqui -->
+            </div>
+        </section>
+
+        <!-- Modal de comentários -->
+        <div id="modalComentarios" class="modal-comentario" data-post-id>
+            <div class="modal-conteudo">
+                <span class="fechar-comentario">&times;</span>
+                <h2>Comentários</h2>
+                <div id="comentarios-lista"></div>
+
+                <form id="form-comentario">
+                    <textarea id="comentario-texto"
+                        placeholder="Escreva um comentário..."></textarea>
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal de Detalhes do Pet -->
+        <div id="modalDetalhes" class="modal">
+            <div class="modal-content">
+                <span class="fechar-detalhes">&times;</span>
+                <h2 id="detalhes-nome"></h2>
+                <img id="detalhes-imagem" src="" alt="Imagem do Pet">
+                <p><strong>Idade:</strong> <span style="color: black;" id="detalhes-idade"></span> anos</p>
+                <p><strong>Peso:</strong> <span style="color: black;" id="detalhes-peso"></span> kg</p>
+                <p><strong>Raça:</strong> <span style="color: black;" id="detalhes-raca"></span></p>
+            </div>
+        </div>
+
+        <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+        
+    </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Curtidas - Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Gerenciar Curtidas</h1>
+        <nav>
+            <a href="/admin">Voltar ao Painel</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="admin-content">
+            <h2>Lista de Curtidas</h2>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Usuário</th>
+                        <th>Post</th>
+                        <th>Curtida</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for curtida in curtidas %}
+                    <tr>
+                        <td>{{ curtida.id }}</td>
+                        <td>{{ curtida.usuario.nome }}</td>
+                        <td>{{ curtida.post.nome_post }}</td>
+                        <td>{{ 'Sim' if curtida.curtida else 'Não' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 ShipeT</p>
+    </footer>
+</body>
+</html>
