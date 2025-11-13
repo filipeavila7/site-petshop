@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho de Compras - ShipeT</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='produto_detalhes.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='carrinho.css') }}">
+</head>
+<body>
+
+    <main>
+        <section class="carrinho-section">
+            <h1>Seu Carrinho de Compras</h1>
+            {% if carrinho_itens %}
+                <div class="carrinho-itens">
+                    {% for item in carrinho_itens %}
+                        <div class="carrinho-item" data-item-id="{{ item.item_id }}">
+                            <input type="checkbox" class="item-checkbox" value="{{ item.item_id }}">
+                            <div class="item-imagem">
+                                <img src="{{ url_for('static', filename=item.imagem) }}" alt="{{ item.nome_produto }}">
+                            </div>
+                            <div class="item-info">
+                                <h3>{{ item.nome_produto }}</h3>
+                                <p class="item-valor">R$ {{ "%.2f"|format(item.valor) }}</p>
+                                <p class="item-descricao">{{ item.descricao }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="carrinho-acoes">
+                    <button id="remover-selecionados">Remover Selecionados</button>
+                    <button id="comprar-selecionados">Comprar Selecionados</button>
+                </div>
+            {% else %}
+                <p>Seu carrinho está vazio.</p>
+            {% endif %}
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 ShipeT</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <script src="{{ url_for('static', filename='carrinho.js') }}"></script>
+</body>
+</html>

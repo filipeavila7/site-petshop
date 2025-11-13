@@ -1,0 +1,3 @@
+- [x] Edit src/static/scripts.js: Add scroll event listener to detect scroll direction and toggle "hidden" class on header
+- [x] Edit src/static/style.css: Add .header.hidden style with transform and transition for smooth animation
+- [ ] Test scrolling behavior to ensure header hides on scroll down and shows on scroll up

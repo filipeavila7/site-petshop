@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Produtos - Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Gerenciar Produtos</h1>
+        <nav>
+            <a href="/admin">Voltar ao Painel</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="admin-content">
+            <h2>Lista de Produtos</h2>
+            <a href="/admin/produto/criar" class="btn-submit" style="margin-bottom: 20px;">Criar Novo Produto</a>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome do Produto</th>
+                        <th>Valor</th>
+                        <th>Descrição</th>
+                        <th>Imagem</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for produto in produtos %}
+                    <tr>
+                        <td>{{ produto.id }}</td>
+                        <td>{{ produto.nome_produto }}</td>
+                        <td>R$ {{ "%.2f"|format(produto.valor) }}</td>
+                        <td>{{ produto.descricao }}</td>
+                        <td><img src="{{ url_for('static', filename=produto.imagem) }}" alt="{{ produto.nome_produto }}" style="width: 50px; height: 50px;"></td>
+                        <td>
+                            <a href="/admin/produto/{{ produto.id }}/editar" class="btn-edit">Editar</a>
+                            <form method="POST" action="/admin/produto/{{ produto.id }}/deletar" style="display: inline;" onsubmit="return confirm('Tem certeza que deseja deletar este produto?')">
+                                <button type="submit" class="btn-delete">Deletar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 ShipeT</p>
+    </footer>
+</body>
+</html>
